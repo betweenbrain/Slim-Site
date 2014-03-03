@@ -13,14 +13,11 @@ define('POSTS', realpath(__DIR__ . '/../posts'));
 
 require realpath(__DIR__ . '/../vendor/autoload.php');
 
-$app = new \Slim\Slim;
-use \Michelf\Markdown;
+$app = new \Slim\Slim(array(
+	'templates.path' => realpath(__DIR__ . '/../templates')
+));
 
-$app->config(
-	array(
-		'templates.path' => realpath(__DIR__ . '/../templates')
-	)
-);
+use \Michelf\Markdown;
 
 $env = $app->environment();
 
