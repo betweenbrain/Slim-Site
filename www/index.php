@@ -10,16 +10,27 @@
  */
 
 define('POSTS', realpath(__DIR__ . '/../posts'));
-define('TEMPLATES', realpath(__DIR__ . '/../templates'));
 
 require realpath(__DIR__ . '/../vendor/autoload.php');
 
 $app = new \Slim\Slim();
 use \Michelf\Markdown;
 
-$app->get('/post/:name', function ($name)
+$app->config(array(
+	'templates.path' => realpath(__DIR__ . '/../templates')
+));
+
+$app->get('/post/:name', function ($name) use ($app)
 {
-	echo Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'));
+	if (file_exists(POSTS . '/' . $name . '.md'))
+	{
+		$app->render('post.php', array('post' => Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'))));
+	}
+	else
+	{
+		// throws a 404 - http://docs.slimframework.com/#Route-Helpers
+		$app->pass();
+	}
 });
 
 $app->run();
