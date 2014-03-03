@@ -22,18 +22,31 @@ $app->config(
 	)
 );
 
+// Homepage blog layout
+$app->get('/', function () use ($app)
+	{
+		foreach (glob(POSTS . '/*.md') as $post)
+		{
+			$url   = str_replace('.md', '', basename($post));
+			$title = ucwords(str_replace('-', ' ', $url));
+			echo '<p><a href="post/' . $url . '">' . $title . '</a></p>';
+		}
+	}
+);
+
+// Individual blog page
 $app->get('/post/:name', function ($name) use ($app)
-{
-	if (file_exists(POSTS . '/' . $name . '.md'))
 	{
-		$app->render('post.php', array('post' => Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'))));
+		if (file_exists(POSTS . '/' . $name . '.md'))
+		{
+			$app->render('post.php', array('post' => Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'))));
+		}
+		else
+		{
+			// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
+			$app->pass();
+		}
 	}
-	else
-	{
-		// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
-		$app->pass();
-	}
-}
 );
 
 $app->run();
