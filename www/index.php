@@ -24,35 +24,39 @@ $app->config(
 
 $env = $app->environment();
 
-$app->render('header.php', array('env' => $env));
-
 // Homepage blog layout
-$app->get('/', function () use ($app)
+$app->get('/', function () use ($app, $env)
 	{
+		$app->render('header.php', array('env' => $env));
+
 		foreach (glob(POSTS . '/*.md') as $post)
 		{
 			$url   = str_replace('.md', '', basename($post));
 			$title = ucwords(str_replace('-', ' ', $url));
 			echo '<p><a href="post/' . $url . '">' . $title . '</a></p>';
 		}
+
+		$app->render('footer.php');
 	}
 );
 
 // Individual blog page
-$app->get('/post/:name', function ($name) use ($app)
+$app->get('/post/:name', function ($name) use ($app, $env)
 	{
+		$app->render('header.php', array('env' => $env));
+
 		if (file_exists(POSTS . '/' . $name . '.md'))
 		{
-			echo Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'));
+			$app->render('post.php', array('post' => Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'))));
 		}
 		else
 		{
 			// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
 			$app->pass();
 		}
+
+		$app->render('footer.php');
 	}
 );
-
-$app->render('footer.php');
 
 $app->run();
