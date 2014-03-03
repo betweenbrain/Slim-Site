@@ -13,12 +13,14 @@ define('POSTS', realpath(__DIR__ . '/../posts'));
 
 require realpath(__DIR__ . '/../vendor/autoload.php');
 
-$app = new \Slim\Slim();
+$app = new \Slim\Slim;
 use \Michelf\Markdown;
 
-$app->config(array(
-	'templates.path' => realpath(__DIR__ . '/../templates')
-));
+$app->config(
+	array(
+		'templates.path' => realpath(__DIR__ . '/../templates')
+	)
+);
 
 $app->get('/post/:name', function ($name) use ($app)
 {
@@ -28,9 +30,10 @@ $app->get('/post/:name', function ($name) use ($app)
 	}
 	else
 	{
-		// throws a 404 - http://docs.slimframework.com/#Route-Helpers
+		// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
 		$app->pass();
 	}
-});
+}
+);
 
 $app->run();
