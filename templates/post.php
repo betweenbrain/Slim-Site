@@ -9,8 +9,4 @@
  * License    GNU GPL v3 or later
  */
 
-include_once 'header.php';
-
 echo $post;
-
-include_once 'footer.php';
