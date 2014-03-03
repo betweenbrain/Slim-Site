@@ -22,6 +22,10 @@ $app->config(
 	)
 );
 
+$env = $app->environment();
+
+$app->render('header.php', array('env' => $env));
+
 // Homepage blog layout
 $app->get('/', function () use ($app)
 	{
@@ -39,7 +43,7 @@ $app->get('/post/:name', function ($name) use ($app)
 	{
 		if (file_exists(POSTS . '/' . $name . '.md'))
 		{
-			$app->render('post.php', array('post' => Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'))));
+			echo Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'));
 		}
 		else
 		{
@@ -48,5 +52,7 @@ $app->get('/post/:name', function ($name) use ($app)
 		}
 	}
 );
+
+$app->render('footer.php');
 
 $app->run();
