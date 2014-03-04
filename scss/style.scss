@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Template:	Oneweb
+   Version: 	3.0 for Joomla 2.5, 3+
+   Created: 	April 2013
+
+   Author: 	Seth Warburton - Internet Inspired! - @nternetinspired
+   Copyright:	Seth Warburton - (C) 2013
+   License:	GNU/GPL v3 or later http://www.gnu.org/licenses/gpl-3.0.html
+
+   Inspiration:	https://github.com/h5bp/html5-boilerplate
+		https://github.com/malarkey/320andup/
+		https://github.com/csswizardry/inuit.css
+   ========================================================================== *
+ * INTRODUCTION
+ * ============
+ *
+ * Oneweb is an Object Orientated framework and so attempts to separate out
+ * everything into re-usable modules. Unlike most other frameworks it tries
+ * to abstract the 'design' away from the layout. The intention is that you
+ * never have to do battle with the framework.
+ *
+ * Breaking everything down into maintainable, and easily digestible, chunks
+ * makes it easy to find and change what you want and separating the basic
+ * design constructs from their styling makes it possible to easily update
+ * the framework without breaking your 'design'.
+ *
+ * HOW DOES IT WORK?
+ * =================
+ *
+ * The Oneweb framework handles basic layout and provides all the css 'tools',
+ * while the UI template does all the pretty stuff.
+ *
+ * STYLEGUIDE
+ * ==========
+ *
+ * For my sanity an yours Oneweb has been authored according to a styleguide,
+ * STYLEGUIDE.md
+   ========================================================================== */
+
+
+// Let's start importing framework stuff!
+@import "variables";
+
+
+// Ensure our mixins are available to all modules by loading them first.
+@import "generic/mixins";
+
+// Normalise default browser renderings to eliminate quirks.
+@import "generic/normalise";
+
+// Ethereal items like mixins, and helpers like float or clearfix.
+@import "generic/helper";
+@import "generic/vertical-rhythm";
+
+/*
+ * The following rules contain generic styles of the type applicable primarily
+ * to named html elements, like <body>, <table> , or to stylistic classes
+ * that can be applied to various objects.
+ */
+@import "elements/root";
+
+
+@import "elements/code";
+@import "elements/figures";
+@import "elements/forms";
+@import "elements/headings";
+@import "elements/images";
+@import "elements/links";
+@import "elements/lists";
+@import "elements/rules";
+@import "elements/tables";
+@import "elements/typesizing";
+@import "elements/typography";
+
+/*
+ * The following are re-usable 'objects' that bring recurring CSS patterns
+ * into discrete and easily maintainable modules.
+ */
+@import "patterns/breadcrumbs";
+@import "patterns/buttons";
+@import "patterns/labels";
+@import "patterns/media";
+//@import "patterns/joomla-modules";
+@import "patterns/nav";
+@import "patterns/pagination";
+
+@import "patterns/rows";
+@import "patterns/wells";
+@import "patterns/wrapper";
+
+@import "patterns/fluid-type";
+/*
+ * These following need to override some base element styles,
+ * so we'll load them last.
+ */
+
+/* Override any defaults like display: block on objects. */
+@import "generic/grid";
+@import "generic/widths";
+
+/*
+ * The following are re-usable 'objects' that bring recurring CSS patterns
+ * into discrete and easily maintainable modules.
+ */
+//@import "sections/buttons";
+//@import "sections/icons";
+
+//@import "sections/header";
+//@import "sections/logo";
+//@import "sections/nav";
+//@import "sections/banner";
+//@import "sections/footer";
+
+@import "sections/back-to-top";
+
+//@import "sections/article-actions";
+//@import "sections/article-info";
+@import "sections/above-row-modules";
+@import "sections/below-row-modules";
