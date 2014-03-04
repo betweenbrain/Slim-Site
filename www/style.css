@@ -30,144 +30,12 @@
  * The Oneweb framework handles basic layout and provides all the css 'tools',
  * while the UI template does all the pretty stuff.
  *
- * This file pulls in the Oneweb framework and any modules that are enabled
- * by default. After that elements are styled by pulling in modules from the
- * UI folder.
- *
- * Modifications to the framework should be made ONLY by overriding its
- * defaults from within the UI template, using the _variables.scss file.
- *
- * Within the UI folder you can do almost anything you want. For example, if
- * you want to add some widgets to your template drop _widgets.scss into the
- * ui folder and then import _widgets.scss using this file. You can also
- * enable the import of any framework modules that are disabled by default,
- * simply by setting the use paramter to true, e.g.,
- *
- * $use-wells:             true;
- *
  * STYLEGUIDE
  * ==========
  *
  * For my sanity an yours Oneweb has been authored according to a styleguide,
  * STYLEGUIDE.md
- *
    ========================================================================== */
-/*
- * _variables.scss overrides framework defaults, and enables optional modules,
- * so it needs to be loaded first.
- *
- *
- * Any variables you find set in framework/_defaults.scss should be overridden
- * in ui/_variables.scss.
- */
-/* ==========================================================================
-   	OPTIONAL MODULES
-   ========================================================================== */
-/* ==========================================================================
-   	OVERRIDE VARIABLES
-   ========================================================================== */
-/* Sets the html background dark for a faux footer. */
-/* ==========================================================================
-   	CUSTOM VARIABLES
-   ========================================================================== */
-/* Now, let's bring in the framework! */
-/* ==========================================================================
-   Package:	Oneweb CSS framework
-   Version: 	1.0
-   Created: 	April 2013
-   ========================================================================== */
-/* ==========================================================================
- * WARNING!!
- * =========
- *
- * Avoid editing this file, or any file within the framework folder!
- * Doing so will make it impossible to update without breaking your template.
- * Alterations and additions should be made within UI folder only.
- *
- * From the UI folder it's easy to disable almost any part of the framework,
- * add to it or modify any aspect of it. Making modifications within the
- * framework folder is doing it the hard way!
-   ========================================================================== */
-/* Let's start importing framework stuff! */
-/* ==========================================================================
-    DEFAULT FONT STACKS
-   ========================================================================== */
-/* ==========================================================================
-    ROOT RULES
-   ========================================================================== */
-/* Default font-size in %, equates to 1em or 16px. */
-/* Our font stacks. */
-/* Default font-weight. */
-/* Root element colours. */
-/* Also set a body background, to allow for faux footers. */
-/* Spacing units derived from line-height; they scale with root-font-size. */
-/* Constrain content widths to maintain an optimal measure (line-length). */
-/* ==========================================================================
-    BRANDING
-   ========================================================================== */
-/* Default brand colour. */
-/* Default colour for objects and borders. */
-/* Link colours. */
-/* The default size of rounded corners. */
-/* UI elements colours, used in badges, buttons, labels, etc. */
-/* ==========================================================================
-    HEADINGS
-   ========================================================================== */
-/* Heading sizes specified in em. */
-/* Heading weight. */
-/* ==========================================================================
-    TYPE SIZING
-   ========================================================================== */
-/* Type (up)sizing classes */
-/* Type (down)sizing classes */
-/* ==========================================================================
-    TYPOGRAPHY
-   ========================================================================== */
-/* Default quote marks. If you're French you'll want to change these. */
-/* ==========================================================================
-    DEFAULT BREAKPOINTS
-   ========================================================================== */
-/* Specifying breakpoints in ems accounts for user-initiated resizes. */
-/* ==========================================================================
-    OPTIONAL MODULES
-   ========================================================================== */
-/* The following modules can be enabled in ui/_variables.scss if required. */
-/* Ensure our mixins are available to all modules by loading them first. */
-/* ==========================================================================
-    MIXINS
-   ========================================================================== */
-/* Set boxsizing, defaults to border-box. */
-/* Set an appropriate line-height for elements when setting font-size. */
-/* The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack. */
-/* Hyphenate text */
-/* Basic transitions. */
-/* Basic coloured box-shadows. */
-/* Basic horizontal gradients. */
-/* Basic vertical gradients. */
-/* Media query mixin to add a defined breakpoint. The following breakpoints
- * are defined in the defaults file but should be re-declared in
- * ui/_variables.scss.
- *
- * palm
- * lap
- * portable
- * desk
- * desk-wide
- *
- * The active breakpoint size is also appended as a class to the html element,
- * primarily to aid in the de-bugging of media-queries.
- *
- * Use the media query mixin like this:
- *
- * @include media-query(desk) {
- *       your-styles-here;
- * }
- *
- * Please note, as this is a mobile-first framework the layout is mobile by
- * default. Palm represents the first breakpoint encountered as screen size
- * increases.
- */
-/* Normalise default browser renderings to eliminate quirks. */
 /* normalize.css v2.1.0 | MIT License | git.io/normalize */
 /* ==========================================================================
    HTML5 display definitions
@@ -505,7 +373,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-/* Ethereal items like mixins, and helpers like float or clearfix. */
 /* ==========================================================================
     HELPER CLASSES
    ========================================================================== */
@@ -550,9 +417,9 @@ table {
   height: 150%; }
 
 /* Mute an object by reducing its opacity. */
-.muted, figure figcaption, .article-meta {
+.muted, figure figcaption {
   filter: alpha(opacity=70) !important;
-  opacity: 0.7 !important; }
+  opacity: 0.7!important; }
 
 /* Add/remove floats */
 .float-right, .img-right, .media .media-object-right {
@@ -618,10 +485,10 @@ ul {
 
 /* Define the root element styles. */
 html {
-  font: 100%/1.618 "Lato", sans-serif;
+  font: 100%/1.618 sans-serif;
   font-weight: 300;
-  background-color: #292929;
-  color: #333333;
+  background-color: white;
+  color: #333337;
   min-height: 100%;
   overflow-y: scroll;
   -webkit-font-smoothing: antialiased;
@@ -638,23 +505,14 @@ body {
 
 /* Colour selected text. */
 ::-moz-selection {
-  background-color: #cd6e57;
+  background-color: #dd4814;
   color: #fff;
   text-shadow: none; }
 
 ::selection {
-  background-color: #cd6e57;
+  background-color: #dd4814;
   color: #fff;
   text-shadow: none; }
-
-/* This needs to override default root font size, so we load it after. */
-/* ==========================================================================
-    FLUID TYPE
-   ========================================================================== */
-/* Slowly increase root font size with viewport */
-@media only screen and (min-width: 90em) {
-  html {
-    font-size: 106.3%; } }
 
 /* ==========================================================================
    	CODE
@@ -777,18 +635,18 @@ meter {
     HEADINGS
    ========================================================================== */
 h1,
-.h1,
+.alpha,
 h2,
-.h2,
+.beta,
 h3,
-.h3,
+.gamma,
 h4,
-.h4,
+.delta,
 h5,
-.h5,
+.epsilon,
 h6,
-.h6 {
-  font-family: "Lato", sans-serif;
+.zeta {
+  font-family: sans-serif;
   font-weight: 300;
   text-rendering: optimizelegibility;
   -moz-font-feature-settings: "liga=1, dlig=1";
@@ -799,42 +657,42 @@ h6,
 
 /* Heading sizes are set with a mixin to maintain vertical rhythm. */
 h1,
-.h1 {
+.alpha {
   font-size: 3em;
   line-height: 1.07867;
   margin-top: 0;
   margin-bottom: 0.53933em; }
 
 h2,
-.h2 {
+.beta {
   font-size: 2.25em;
   line-height: 1.43822;
   margin-top: 0;
   margin-bottom: 0.71911em; }
 
 h3,
-.h3 {
+.gamma {
   font-size: 1.5em;
   line-height: 1.07867;
   margin-top: 0;
   margin-bottom: 1.07867em; }
 
 h4,
-.h4 {
+.delta {
   font-size: 1.3125em;
   line-height: 1.23276;
   margin-top: 0;
   margin-bottom: 1.23276em; }
 
 h5,
-.h5 {
+.epsilon {
   font-size: 1.125em;
   line-height: 1.43822;
   margin-top: 0;
   margin-bottom: 1.43822em; }
 
 h6,
-.h6 {
+.zeta {
   font-size: 1em;
   line-height: 1.618;
   margin-top: 0;
@@ -881,20 +739,10 @@ a {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  color: #cd6e57;
+  color: #dd4814;
   text-decoration: none; }
   a:hover, a:focus {
-    color: #ba5137; }
-
-/* Back to top link. */
-a.to-top {
-  bottom: 0;
-  color: #333333;
-  cursor: pointer;
-  line-height: 1;
-  padding: 0.809em;
-  position: fixed;
-  right: 0; }
+    color: #ae3910; }
 
 /* ==========================================================================
     LISTS
@@ -990,7 +838,7 @@ td {
  * Classes for down-sizing type without the semantics of h or small tags.
  * Useful in article footers, for example.
  */
-.milli, figure figcaption, cite {
+.milli, figure figcaption, cite, .breadcrumb {
   font-size: 0.83em;
   line-height: 1.9494;
   margin-top: 0;
@@ -1019,10 +867,8 @@ td {
  *
  * http://v1.jontangerine.com/silo/typography/p/
  */
-.article p {
-  font-variant-numeric: oldstyle-nums; }
-  .article p + p {
-    text-indent: 1em; }
+.article p + p {
+  text-indent: 1em; }
 
 /* Typically used in the first paragraph of an article, for added awesome. */
 .intro {
@@ -1071,6 +917,8 @@ q {
 abbr {
   font-variant: small-caps;
   letter-spacing: 0.1em; }
+  abbr[title] {
+    cursor: help; }
 
 /*
  * The following are re-usable 'objects' that bring recurring CSS patterns
@@ -1080,7 +928,6 @@ abbr {
     BREADCRUMBS
    ========================================================================== */
 .breadcrumb {
-  font-size: 0.813em;
   margin-bottom: 0; }
   .breadcrumb > li + li:before {
     content: "\00BB" "\00A0";
@@ -1089,10 +936,9 @@ abbr {
 /* ==========================================================================
     BUTTONS
    ========================================================================== */
-.btn, .banner-row .download-link, .banner-row .respository-link,
+.btn,
 .btn-primary,
 .btn-success,
-.banner-row .download-link,
 .btn-danger,
 .btn-info,
 .btn-warning {
@@ -1102,7 +948,7 @@ abbr {
   cursor: pointer;
   display: inline-block;
   font-size: 100%;
-  font-family: "Lato", sans-serif;
+  font-family: sans-serif;
   font-weight: 400;
   line-height: 3;
   margin-right: 0.809em;
@@ -1110,22 +956,19 @@ abbr {
   padding: 0 1em;
   vertical-align: middle;
   white-space: nowrap; }
-  .btn:hover, .banner-row .download-link:hover, .banner-row .respository-link:hover,
+  .btn:hover,
   .btn-primary:hover,
   .btn-success:hover,
-  .banner-row .download-link:hover,
   .btn-danger:hover,
   .btn-info:hover,
   .btn-warning:hover {
     text-decoration: none;
     background-color: #efefef; }
-  .btn:active, .banner-row .download-link:active, .banner-row .respository-link:active, .btn:focus, .banner-row .download-link:focus, .banner-row .respository-link:focus,
+  .btn:active, .btn:focus,
   .btn-primary:active,
   .btn-primary:focus,
   .btn-success:active,
-  .banner-row .download-link:active,
   .btn-success:focus,
-  .banner-row .download-link:focus,
   .btn-danger:active,
   .btn-danger:focus,
   .btn-info:active,
@@ -1137,14 +980,12 @@ abbr {
 /* BUTTON COLOURS */
 .btn-primary,
 .btn-success,
-.banner-row .download-link,
 .btn-danger,
 .btn-info,
 .btn-warning {
   color: #fff; }
   .btn-primary:hover,
   .btn-success:hover,
-  .banner-row .download-link:hover,
   .btn-danger:hover,
   .btn-info:hover,
   .btn-warning:hover {
@@ -1155,9 +996,9 @@ abbr {
   .btn-primary:hover {
     background-color: #357ebd; }
 
-.btn-success, .banner-row .download-link {
+.btn-success {
   background-color: #5cb85c; }
-  .btn-success:hover, .banner-row .download-link:hover {
+  .btn-success:hover {
     background-color: #4cae4c; }
 
 .btn-danger {
@@ -1245,22 +1086,14 @@ abbr {
     margin-right: 0; }
 
 /* ==========================================================================
-    JOOMLA MODULES
-   ========================================================================== */
-.module {
-  /* Remove default bullets on lists inside modules */ }
-  .module ul {
-    list-style-type: none; }
-
-/* ==========================================================================
     NAVIGATION
    ========================================================================== */
 /* Remove list styles and throw child elements into a horizontal list. */
-.nav, .breadcrumb, .pagination ul, .pagenav, .social, .actions {
+.nav, .breadcrumb, .pagination ul, .pagenav, .social {
   list-style: none; }
-  .nav li, .breadcrumb li, .pagination ul li, .pagenav li, .social li, .actions li {
+  .nav li, .breadcrumb li, .pagination ul li, .pagenav li, .social li {
     display: inline-block; }
-    .nav li a, .breadcrumb li a, .pagination ul li a, .pagenav li a, .social li a, .actions li a {
+    .nav li a, .breadcrumb li a, .pagination ul li a, .pagenav li a, .social li a {
       padding: 0.20225em; }
 
 /* Creates a vertical list of blocky, finger-friendly, links. */
@@ -1281,7 +1114,7 @@ abbr {
 .pagenav li {
   width: 50%; }
 .pagenav .previous {
-  margin-right: -.25em; }
+  margin-right: -0.25em; }
 .pagenav .next {
   float: right;
   text-align: right; }
@@ -1313,9 +1146,18 @@ abbr {
 /* ==========================================================================
     CONTENT WRAPPER
    ========================================================================== */
-.wrapper {
+[class*="-row"] > [role],
+[class*="-row"] > section {
   margin: 0 auto;
   max-width: 45em; }
+
+/* ==========================================================================
+    FLUID TYPE
+   ========================================================================== */
+/* Slowly increase root font size with viewport */
+@media only screen and (min-width: 90em) {
+  html {
+    font-size: 106.3%; } }
 
 /*
  * These following need to override some base element styles,
@@ -1325,11 +1167,17 @@ abbr {
 /* ==========================================================================
     GRID
    ========================================================================== */
-.grid-item, .logo, [role="navigation"], .footer-row .module, .social, .copyright, .above-row .module, .below-row .module {
+.grid-item, .grid-item-padded, .logo, [role="navigation"], .footer-row .module, .social, .copyright, .above-row .module, .below-row .module {
   display: inline-block;
-  margin-right: -.25em;
+  margin-right: -0.25em;
   width: 100%;
   vertical-align: top; }
+
+.grid-item-padded {
+  padding-left: 1.618em; }
+
+.grid-container {
+  margin-left: -1.618em; }
 
 /* ==========================================================================
     WIDTHS
@@ -1840,127 +1688,10 @@ abbr {
 
   .deskwide-eleven-twelfths {
     width: 91.666%; } }
-/* Next up, the template UI! */
-/* ==========================================================================
-	Package:	Oneweb template UI
-	Version: 	1.0
-	Created: 	April 2013
-   ========================================================================== */
-/* ==========================================================================
-   	LINKS
-   ========================================================================== */
-/* Back to top link. */
-a.to-top {
-  background: #cd6e57;
-  color: #fff; }
-
-/* ==========================================================================
-    TYPOGRAPHY
-   ========================================================================== */
-/* BLOCK QUOTES */
-/* Borders are nice, sometimes. */
-blockquote {
-  border-left: 4px solid #d9907e;
-  font-style: italic; }
-
-cite {
-  font-style: normal; }
-
-/* EMPHATIC ELEMENTS */
-/* We reset the root font size to 300, so better wind down boldness. */
-b,
-strong {
-  font-weight: 400; }
-
-/* ==========================================================================
-    FONT-FACE FONTS
-   ========================================================================== */
-@font-face {
-  font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot");
-  src: url("../fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("../fonts/icomoon.woff") format("woff"), url("../fonts/icomoon.ttf") format("truetype"), url("../fonts/icomoon.svg#icomoon") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-/* Use the following CSS code if you want to have a class per icon */
 /*
-Instead of a list of all class selectors,
-you can use the generic selector below, but it's slower:
-[class*="icon-"] {
-*/
-/*.icon-home, .icon-pencil, .icon-connection, .icon-menu, */
-.icon-google-plus, .googleplus, .icon-facebook, .facebook, .icon-twitter, .twitter, .icon-feed, .rss, .icon-dribbble, .dribbble, .icon-github, .github, .icon-paypal {
-  font-family: 'icomoon';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased; }
-
-/* Not actually using the following right now, so commenting out. May, or may not,
- * get round to grabbing a new set of font files.
-
-.icon-home:before {
-	content: "\e004";
-}
-.icon-pencil:before {
-	content: "\e005";
-}
-.icon-connection:before {
-	content: "\e006";
-}
-.icon-menu:before {
-	content: "\e007";
-}
-.icon-feed:before {
-	content: "\e002";
-}
-*/
-.icon-google-plus:before, .googleplus:before {
-  content: "\e000"; }
-
-.icon-facebook:before, .facebook:before {
-  content: "\e008"; }
-
-.icon-twitter:before, .twitter:before {
-  content: "\e001"; }
-
-.icon-dribbble:before, .dribbble:before {
-  content: "\e009"; }
-
-.icon-github:before, .github:before {
-  content: "\e00a"; }
-
-.icon-paypal:before {
-  content: "\e00b"; }
-
-/* Print /email icons are ugly, let's not bother! */
-/*
-.icon-print:before {
-	content: "\e00c";
-}
-.icon-mail:before {
-	content: "\e00d";
-}
-*/
-/* ==========================================================================
-    UI BUTTONS
-   ========================================================================== */
-/*
- * Let's add some template-specific style to these babies!
+ * The following are re-usable 'objects' that bring recurring CSS patterns
+ * into discrete and easily maintainable modules.
  */
-.btn, .banner-row .download-link, .banner-row .respository-link {
-  font-weight: 400; }
-
-/* ==========================================================================
-    WELLS
-   ========================================================================== */
-.well {
-  background: #fcfcfc;
-  border: 1px solid #eeeeee; }
-
 /* ==========================================================================
     ICONS
    ========================================================================== */
@@ -1979,29 +1710,10 @@ of adding icon classes in our markup. It's more awesome. */
 }
 */
 /* ==========================================================================
-    ROWS
-   ========================================================================== */
-/* Make some adjustments for special rows */
-.header-row .content,
-.breadcrumb-row .content,
-.credit-row .content {
-  padding: 1.618em 0; }
-
-/* ==========================================================================
-    HEADER
-   ========================================================================== */
-.header-row {
-  text-align: center; }
-  @media only screen and (min-width: 45em) {
-    .header-row {
-      text-align: left; } }
-
-/* ==========================================================================
     LOGO
    ========================================================================== */
 @media only screen and (min-width: 45em) {
   .logo {
-    margin-bottom: 0;
     vertical-align: middle; } }
 
 /* ==========================================================================
@@ -2011,47 +1723,21 @@ of adding icon classes in our markup. It's more awesome. */
 [role="navigation"] {
   font-variant: small-caps;
   font-weight: 400; }
-  [role="navigation"] ul {
-    margin-bottom: 0; }
-    [role="navigation"] ul > li {
-      margin: 0 0.20225em; }
-      [role="navigation"] ul > li a {
-        display: block;
-        padding: 0.4045em; }
+  [role="navigation"] ul > li {
+    margin: 0 0.20225em; }
+    [role="navigation"] ul > li a {
+      display: block;
+      padding: 0.4045em; }
   @media only screen and (min-width: 45em) {
     [role="navigation"] {
       text-align: right;
       vertical-align: middle; } }
 
 /* ==========================================================================
-    BANNER
-   ========================================================================== */
-.banner-row {
-  background: url(../images/tundra.jpg) center center;
-  background-size: cover;
-  /* The download button */
-  /* The GitHub button */ }
-  .banner-row h1,
-  .banner-row h2 {
-    color: #fff; }
-  .banner-row .content {
-    -webkit-transition: padding 0.3s ease;
-    -moz-transition: padding 0.3s ease;
-    -ms-transition: padding 0.3s ease;
-    -o-transition: padding 0.3s ease;
-    transition: padding 0.3s ease; }
-    @media only screen and (min-width: 45em) {
-      .banner-row .content {
-        padding: 2.427em 0 0.809em; } }
-    @media only screen and (min-width: 90em) {
-      .banner-row .content {
-        padding: 3.236em 0 1.618em; } }
-
-/* ==========================================================================
     FOOTER
    ========================================================================== */
 .footer-row {
-  background: #cd6e57;
+  background: #dd4814;
   /* Offset the content container as we're padding the grid items */
   /* Make each module a grid item */ }
   @media only screen and (min-width: 45em) {
@@ -2096,26 +1782,18 @@ of adding icon classes in our markup. It's more awesome. */
       text-align: right; } }
 
 /* ==========================================================================
-    ARTICLE ACTIONS
+   	BACK TO TOP LINK
    ========================================================================== */
-/* The print / mail /edit links */
-.actions {
-  font-size: 0.83em;
-  line-height: 1.9494;
-  margin-top: 0;
-  margin-bottom: 1.9494em;
-  margin-top: 0;
-  text-align: right; }
-
-/* ==========================================================================
-    ARTICLE INFO
-   ========================================================================== */
-/* Article category, author, publish date, hits, etc. */
-.article-meta {
-  font-size: 0.83em;
-  line-height: 1.9494;
-  margin-top: 0;
-  margin-bottom: 1.9494em; }
+a.to-top {
+  background: #dd4814;
+  bottom: 0;
+  color: white;
+  cursor: pointer;
+  display: block;
+  line-height: 1;
+  padding: 0.809em;
+  position: fixed;
+  right: 0; }
 
 /* ==========================================================================
     ABOVE-ROW MODULES

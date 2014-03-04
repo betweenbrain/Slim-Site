@@ -37,18 +37,16 @@ $baseUrl = $app->request->getRootUri();
 			<a href="<?php echo $app->request->getRootUri(); ?>" title="">matt-thomas.me</a>
 			<small>v0.4</small>
 		</div>
-
+		<nav role="navigation">
+			<ul class="nav menu">
+				<li><a href="<?php echo $baseUrl ?>/about">About</a></li>
+				<li><a href="<?php echo $baseUrl ?>/posts">Posts</a></li>
+				<li><a href="<?php echo $baseUrl ?>/talks">Talks</a></li>
+			</ul>
+		</nav>
 	</header>
 </div>
-<div class="nav-row">
-	<nav role="navigation">
-		<ul>
-			<li><a href="<?php echo $baseUrl ?>/about">About</a></li>
-			<li><a href="<?php echo $baseUrl ?>/posts">Posts</a></li>
-			<li><a href="<?php echo $baseUrl ?>/talks">Talks</a></li>
-		</ul>
-	</nav>
-</div>
+
 <div class="main-row">
 	<main role="main">
 		<?php

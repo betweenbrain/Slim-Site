@@ -41,7 +41,6 @@
 // Let's start importing framework stuff!
 @import "variables";
 
-
 // Ensure our mixins are available to all modules by loading them first.
 @import "generic/mixins";
 
@@ -103,13 +102,13 @@
  * into discrete and easily maintainable modules.
  */
 //@import "sections/buttons";
-//@import "sections/icons";
+@import "sections/icons";
 
 //@import "sections/header";
-//@import "sections/logo";
-//@import "sections/nav";
+@import "sections/logo";
+@import "sections/nav";
 //@import "sections/banner";
-//@import "sections/footer";
+@import "sections/footer";
 
 @import "sections/back-to-top";
 
