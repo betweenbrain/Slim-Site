@@ -1,16 +1,18 @@
-
 /* ==========================================================================
     LOGO
    ========================================================================== */
 
 .logo {
 
-	@extend .grid-item;
-	@extend .kilo;
+  @extend .grid-item;
+  font-size     : 1.75em;
+  line-height   : 1.07867;
+  margin-top    : 0;
+  margin-bottom : 0.53933em;
 
-	@include media-query(lap) {
-		@extend .lap-two-fifths;
-		//margin-bottom: 0;
-		vertical-align: middle;
-	}
+  @include media-query(lap) {
+    @extend .lap-two-fifths;
+    //margin-bottom: 0;
+    vertical-align : middle;
+  }
 }
