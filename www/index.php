@@ -14,6 +14,7 @@ define('POSTS', realpath(__DIR__ . '/../posts'));
 require realpath(__DIR__ . '/../vendor/autoload.php');
 
 $app = new \Slim\Slim(array(
+	'mode'           => 'development',
 	'templates.path' => realpath(__DIR__ . '/../templates')
 ));
 
@@ -21,38 +22,36 @@ use \Michelf\Markdown;
 
 $env = $app->environment();
 
-// Homepage blog layout
-$app->get('/', function () use ($app, $env)
-	{
-		$app->render('header.php', array('env' => $env));
+$page = new stdClass;
 
+// Homepage blog layout
+$app->get('/', function () use ($app, $env, $page)
+	{
 		foreach (glob(POSTS . '/*.md') as $post)
 		{
-			$url   = str_replace('.md', '', basename($post));
-			$title = ucwords(str_replace('-', ' ', $url));
-			echo '<p><a href="post/' . $url . '">' . $title . '</a></p>';
+			$url             = str_replace('.md', '', basename($post));
+			$title           = ucwords(str_replace('-', ' ', $url));
+			$page->content[] = '<p><a href="post/' . $url . '">' . $title . '</a></p>';
+			$page->title     = 'blog';
 		}
-
-		$app->render('footer.php');
+		$app->render('page.php', array('app' => $app, 'page' => $page));
 	}
 );
 
 // Individual blog page
-$app->get('/post/:name', function ($name) use ($app, $env)
+$app->get('/post/:name', function ($name) use ($app, $env, $page)
 	{
-		$app->render('header.php', array('env' => $env));
-
 		if (file_exists(POSTS . '/' . $name . '.md'))
 		{
-			$app->render('post.php', array('post' => Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'))));
+			$page->content[] = Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'));
+			$page->title     = ucwords(str_replace('-', ' ', $name));
+			$app->render('page.php', array('app' => $app, 'page' => $page));
 		}
 		else
 		{
 			// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
 			$app->pass();
 		}
-
-		$app->render('footer.php');
 	}
 );
 
