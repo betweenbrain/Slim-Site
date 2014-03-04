@@ -57,6 +57,7 @@
 .social {
 	@extend .grid-item;
 	@extend .nav;
+  font-size: 2em;
 
 	@include media-query(lap) {
 		@extend .lap-two-thirds;

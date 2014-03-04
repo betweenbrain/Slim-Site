@@ -70,23 +70,18 @@ $baseUrl = $app->request->getRootUri();
 
 <div class="credit-row">
 	<section>
-
 		<ul class="social">
-
-			<li><a class="twitter" href="" title="Follow me on Twitter" target="_blank"></a></li>
-
-			<li><a class="dribbble" href="" title="See my latest work at Dribbble" target="_blank"></a></li>
-
-			<li><a class="facebook" href="" title="Annoy me on Facebook" target="_blank"></a></li>
-
-			<li><a class="googleplus" href="" title="Find me on G+" target="_blank"></a></li>
-
-			<li><a class="github" href="" title="All the codez" target="_blank"></a></li>
-
+			<li>
+				<a class="twitter" href="https://twitter.com/betweenbrain" title="Follow me on Twitter" target="_blank"></a>
+			</li>
+			<li>
+				<a class="googleplus" href="https://plus.google.com/+MattThomasMe" title="Find me on G+" target="_blank"></a>
+			</li>
+			<li><a class="github" href="https://github.com/betweenbrain" title="All the codez" target="_blank"></a></li>
 		</ul>
 
 		<div class="copyright">
-			<small>&copy;  </small>
+			<small>&copy; <?php echo date('Y'); ?> Matt Thomas</small>
 		</div>
 	</section>
 </div>
