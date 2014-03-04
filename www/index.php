@@ -28,12 +28,13 @@ $page = new stdClass;
 // Homepage blog layout
 $app->get('/', function () use ($app, $env, $page)
 	{
-		foreach (glob(POSTS . '/*.md') as $post)
+		foreach (array_slice(array_reverse(glob(POSTS . '/*.md')), 0, 5) as $key => $post)
 		{
-			$url             = str_replace('.md', '', basename($post));
-			$title           = ucwords(str_replace('-', ' ', $url));
-			$page->content[] = '<p><a href="post/' . $url . '">' . $title . '</a></p>';
-			$page->title     = 'blog';
+			$url                 = str_replace('.md', '', basename($post));
+			$title               = ucwords(str_replace('-', ' ', substr($url, 11)));
+			$page->content[$key] = '<h2><a href="post/' . $url . '">' . $title . '</a></h2>';
+			$page->content[$key] .= substr(Markdown::defaultTransform(file_get_contents($post)), 0, 50);
+			$page->title = 'blog';
 		}
 		$app->render('page.php', array('app' => $app, 'page' => $page));
 	}
@@ -59,7 +60,19 @@ $app->get('/post/:name', function ($name) use ($app, $env, $page)
 // Individual pages
 $app->get('/:name', function ($name) use ($app, $env, $page)
 	{
-		if (file_exists(PAGES . '/' . $name . '.md'))
+		if ($name == 'posts')
+		{
+			foreach (array_reverse(glob(POSTS . '/*.md')) as $key => $post)
+			{
+				$url                 = str_replace('.md', '', basename($post));
+				$title               = ucwords(str_replace('-', ' ', substr($url, 11)));
+				$page->content[$key] = '<h2><a href="post/' . $url . '">' . $title . '</a></h2>';
+				$page->content[$key] .= substr(Markdown::defaultTransform(file_get_contents($post)), 0, 50);
+				$page->title = 'blog';
+			}
+			$app->render('page.php', array('app' => $app, 'page' => $page));
+		}
+		elseif (file_exists(PAGES . '/' . $name . '.md'))
 		{
 			$page->content[] = Markdown::defaultTransform(file_get_contents(PAGES . '/' . $name . '.md'));
 			$page->title     = ucwords(str_replace('-', ' ', $name));
