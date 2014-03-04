@@ -10,6 +10,7 @@
  */
 
 define('POSTS', realpath(__DIR__ . '/../posts'));
+define('PAGES', realpath(__DIR__ . '/../pages'));
 
 require realpath(__DIR__ . '/../vendor/autoload.php');
 
@@ -44,6 +45,23 @@ $app->get('/post/:name', function ($name) use ($app, $env, $page)
 		if (file_exists(POSTS . '/' . $name . '.md'))
 		{
 			$page->content[] = Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'));
+			$page->title     = ucwords(str_replace('-', ' ', $name));
+			$app->render('page.php', array('app' => $app, 'page' => $page));
+		}
+		else
+		{
+			// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
+			$app->pass();
+		}
+	}
+);
+
+// Individual pages
+$app->get('/:name', function ($name) use ($app, $env, $page)
+	{
+		if (file_exists(PAGES . '/' . $name . '.md'))
+		{
+			$page->content[] = Markdown::defaultTransform(file_get_contents(PAGES . '/' . $name . '.md'));
 			$page->title     = ucwords(str_replace('-', ' ', $name));
 			$app->render('page.php', array('app' => $app, 'page' => $page));
 		}
