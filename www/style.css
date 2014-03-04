@@ -485,10 +485,10 @@ ul {
 
 /* Define the root element styles. */
 html {
-  font: 100%/1.618 sans-serif;
+  font: 100%/1.618 "Lato", sans-serif;
   font-weight: 300;
   background-color: white;
-  color: #333337;
+  color: #292929;
   min-height: 100%;
   overflow-y: scroll;
   -webkit-font-smoothing: antialiased;
@@ -505,12 +505,12 @@ body {
 
 /* Colour selected text. */
 ::-moz-selection {
-  background-color: #dd4814;
+  background-color: #0060a1;
   color: #fff;
   text-shadow: none; }
 
 ::selection {
-  background-color: #dd4814;
+  background-color: #0060a1;
   color: #fff;
   text-shadow: none; }
 
@@ -646,7 +646,7 @@ h5,
 .epsilon,
 h6,
 .zeta {
-  font-family: sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 300;
   text-rendering: optimizelegibility;
   -moz-font-feature-settings: "liga=1, dlig=1";
@@ -739,10 +739,10 @@ a {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  color: #dd4814;
+  color: #0060a1;
   text-decoration: none; }
   a:hover, a:focus {
-    color: #ae3910; }
+    color: #00426e; }
 
 /* ==========================================================================
     LISTS
@@ -948,7 +948,7 @@ abbr {
   cursor: pointer;
   display: inline-block;
   font-size: 100%;
-  font-family: sans-serif;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
   line-height: 3;
   margin-right: 0.809em;
@@ -1693,6 +1693,79 @@ abbr {
  * into discrete and easily maintainable modules.
  */
 /* ==========================================================================
+    FONT-FACE FONTS
+   ========================================================================== */
+@font-face {
+  font-family: 'icomoon';
+  src: url("fonts/icomoon.eot");
+  src: url("fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("fonts/icomoon.woff") format("woff"), url("fonts/icomoon.ttf") format("truetype"), url("fonts/icomoon.svg#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+/* Use the following CSS code if you want to have a class per icon */
+/*
+Instead of a list of all class selectors,
+you can use the generic selector below, but it's slower:
+[class*="icon-"] {
+*/
+/*.icon-home, .icon-pencil, .icon-connection, .icon-menu, */
+.icon-google-plus, .googleplus, .icon-facebook, .facebook, .icon-twitter, .twitter, .icon-feed, .rss, .icon-dribbble, .dribbble, .icon-github, .github, .icon-paypal {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased; }
+
+/* Not actually using the following right now, so commenting out. May, or may not,
+ * get round to grabbing a new set of font files.
+
+.icon-home:before {
+	content: "\e004";
+}
+.icon-pencil:before {
+	content: "\e005";
+}
+.icon-connection:before {
+	content: "\e006";
+}
+.icon-menu:before {
+	content: "\e007";
+}
+.icon-feed:before {
+	content: "\e002";
+}
+*/
+.icon-google-plus:before, .googleplus:before {
+  content: "\e000"; }
+
+.icon-facebook:before, .facebook:before {
+  content: "\e008"; }
+
+.icon-twitter:before, .twitter:before {
+  content: "\e001"; }
+
+.icon-dribbble:before, .dribbble:before {
+  content: "\e009"; }
+
+.icon-github:before, .github:before {
+  content: "\e00a"; }
+
+.icon-paypal:before {
+  content: "\e00b"; }
+
+/* Print /email icons are ugly, let's not bother! */
+/*
+.icon-print:before {
+	content: "\e00c";
+}
+.icon-mail:before {
+	content: "\e00d";
+}
+*/
+/* ==========================================================================
     ICONS
    ========================================================================== */
 /* Let's apply the icon styles semantically to elements instead
@@ -1737,7 +1810,7 @@ of adding icon classes in our markup. It's more awesome. */
     FOOTER
    ========================================================================== */
 .footer-row {
-  background: #dd4814;
+  background: #0060a1;
   /* Offset the content container as we're padding the grid items */
   /* Make each module a grid item */ }
   @media only screen and (min-width: 45em) {
@@ -1785,7 +1858,7 @@ of adding icon classes in our markup. It's more awesome. */
    	BACK TO TOP LINK
    ========================================================================== */
 a.to-top {
-  background: #dd4814;
+  background: #0060a1;
   bottom: 0;
   color: white;
   cursor: pointer;

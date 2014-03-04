@@ -17,7 +17,7 @@
 //  DEFAULT FONT STACKS
 // ==========================================================================
 
-$sans-family:           sans-serif;
+$sans-family:           'Lato', sans-serif;
 $serif-family:          serif;
 $code-font-family:      monospace;
 
@@ -31,7 +31,7 @@ $heading-family:        $sans-family;
 // ==========================================================================
 
 // Root element colours.
-$root-color:            rgb(51,51,55);
+$root-color:            rgb(41,41,41);
 $root-background:       rgb(255,255,255);
 
 // Default font-size in %, equates to 1em or 16px.
@@ -63,8 +63,8 @@ $wrapper-width:         45em;
 // ==========================================================================
 
 // Brand palette
-$brand-color: 			rgb(221, 72, 20);
-//$brand-color-secondary: ;
+$brand-color: 			rgb(0, 96, 161);
+$brand-color-secondary: rgb(242, 105, 34);
 //$brand-color-tertiary:	;
 
 // Default colour for objects and borders.

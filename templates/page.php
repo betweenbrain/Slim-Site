@@ -25,6 +25,7 @@ $baseUrl = $app->request->getRootUri();
 <head>
 	<title><?php echo $page->title ?></title>
 	<link rel="stylesheet" href="<?php echo $baseUrl ?>/style.css" type="text/css" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400" type="text/css" />
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
