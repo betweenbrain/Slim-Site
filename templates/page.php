@@ -8,17 +8,23 @@
  * Copyright  Copyright (C) 2014 betweenbrain llc. All Rights Reserved.
  * License    GNU GPL v3 or later
  */
+
+$baseUrl = $app->request->getRootUri();
 ?>
 <!doctype html>
-<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
-<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>
+<html class="no-js lt-ie10" lang="en"> <![endif]-->
 <!--[if !IE]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 	<title><?php echo $page->title ?></title>
-	<link rel="stylesheet" href="<?php echo $app->request->getRootUri(); ?>/style.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo $baseUrl ?>/style.css" type="text/css" />
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -28,16 +34,20 @@
 <div class="header-row">
 	<header role="banner">
 		<div class="logo">
-			<a href="<?php echo $app->request->getRootUri(); ?>" title="">A slim site</a>
+			<a href="<?php echo $app->request->getRootUri(); ?>" title="">matt-thomas.me</a>
+			<small>v0.4</small>
 		</div>
+
 	</header>
 </div>
 <div class="nav-row">
-
 	<nav role="navigation">
-
+		<ul>
+			<li><a href="<?php echo $baseUrl ?>/about">About</a></li>
+			<li><a href="<?php echo $baseUrl ?>/posts">Posts</a></li>
+			<li><a href="<?php echo $baseUrl ?>/talks">Talks</a></li>
+		</ul>
 	</nav>
-
 </div>
 <div class="main-row">
 	<main role="main">
