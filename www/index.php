@@ -30,14 +30,7 @@ $app->get('/', function () use ($app, $env, $page)
 	{
 		foreach (array_slice(array_reverse(glob(POSTS . '/*.md')), 0, 3) as $key => $post)
 		{
-			$metadata            = parseMetadata(file_get_contents($post));
-			$url                 = str_replace('.md', '', basename($post));
-			$page->content[$key] = '<h2><a href="post/' . $url . '">' . $metadata['title'] . '</a></h2>';
-
-			if (isset($metadata['description']))
-			{
-				$page->content[$key] .= $metadata['description'];
-			}
+			renderBlogPost($key, $page, $post);
 		}
 		$page->title = 'blog';
 		$app->render('page.php', array('app' => $app, 'page' => $page));
@@ -47,56 +40,72 @@ $app->get('/', function () use ($app, $env, $page)
 // Individual blog page
 $app->get('/post/:name', function ($name) use ($app, $env, $page)
 	{
-		if (file_exists(POSTS . '/' . $name . '.md'))
+		$post = file_get_contents(POSTS . '/' . $name . '.md');
+		$page = renderPage($page, $post);
+		$app->render('page.php', array('app' => $app, 'page' => $page));
+	}
+);
+
+// Blog page
+$app->get('/posts', function () use ($app, $env, $page)
+	{
+		foreach (array_reverse(glob(POSTS . '/*.md')) as $key => $post)
 		{
-			$post            = file_get_contents(POSTS . '/' . $name . '.md');
-			$content         = substr($post, strrpos($post, '---'), strlen($post));
-			$page->content[] = Markdown::defaultTransform($content);
-			$page->metadata  = parseMetadata($post);
-			$page->title     = $page->metadata['title'];
-			$app->render('page.php', array('app' => $app, 'page' => $page));
+			renderBlogPost($key, $page, $post);
 		}
-		else
-		{
-			// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
-			$app->pass();
-		}
+		$page->title = 'blog';
+		$app->render('page.php', array('app' => $app, 'page' => $page));
+
 	}
 );
 
 // Individual pages
 $app->get('/:name', function ($name) use ($app, $env, $page)
 	{
-		if ($name == 'posts')
-		{
-			foreach (array_reverse(glob(POSTS . '/*.md')) as $key => $post)
-			{
-				$url                 = str_replace('.md', '', basename($post));
-				$title               = ucwords(str_replace('-', ' ', substr($url, 11)));
-				$page->content[$key] = '<h2><a href="post/' . $url . '">' . $title . '</a></h2>';
-				$page->content[$key] .= substr(Markdown::defaultTransform(file_get_contents($post)), 0, 50);
-			}
-			$page->title = 'blog';
-			$app->render('page.php', array('app' => $app, 'page' => $page));
-		}
-		elseif (file_exists(PAGES . '/' . $name . '.md'))
-		{
-			$post            = file_get_contents(PAGES . '/' . $name . '.md');
-			$content         = substr($post, strrpos($post, '---'), strlen($post));
-			$page->content[] = Markdown::defaultTransform($content);
-			$page->metadata  = parseMetadata($post);
-			$page->title     = ucwords(str_replace('-', ' ', $name));
-			$app->render('page.php', array('app' => $app, 'page' => $page));
-		}
-		else
-		{
-			// Throws a 404 - http://docs.slimframework.com/#Route-Helpers
-			$app->pass();
-		}
+		$post = file_get_contents(PAGES . '/' . $name . '.md');
+		$page = renderPage($page, $post);
+		$app->render('page.php', array('app' => $app, 'page' => $page));
 	}
 );
 
 $app->run();
+
+/**
+ * Renders a single page
+ *
+ * @param $page
+ * @param $post
+ *
+ * @return mixed
+ */
+function renderPage($page, $post)
+{
+	$content         = substr($post, strrpos($post, '---'), strlen($post));
+	$page->content[] = Markdown::defaultTransform($content);
+	$page->metadata  = parseMetadata($post);
+	$page->title     = $page->metadata['title'];
+
+	return $page;
+}
+
+/**
+ * Renders a single blog post for blog pages
+ *
+ * @param $key
+ * @param $page
+ * @param $post
+ */
+function renderBlogPost($key, $page, $post)
+{
+	$metadata            = parseMetadata(file_get_contents($post));
+	$url                 = str_replace('.md', '', basename($post));
+	$page->content[$key] = '<h2><a href="post/' . $url . '">' . $metadata['title'] . '</a></h2>';
+
+	if (isset($metadata['description']))
+	{
+		$page->content[$key] .= $metadata['description'];
+	}
+}
 
 /**
  * Parse markdown file for metadate
