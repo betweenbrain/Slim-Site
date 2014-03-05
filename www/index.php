@@ -40,9 +40,7 @@ $app->get('/', function () use ($app, $env, $page)
 // Individual blog page
 $app->get('/post/:name', function ($name) use ($app, $env, $page)
 	{
-		$post = file_get_contents(POSTS . '/' . $name . '.md');
-		$page = renderPage($page, $post);
-		$app->render('page.php', array('app' => $app, 'page' => $page));
+		renderPage($app, $name, POSTS, $page);
 	}
 );
 
@@ -62,9 +60,7 @@ $app->get('/posts', function () use ($app, $env, $page)
 // Individual pages
 $app->get('/:name', function ($name) use ($app, $env, $page)
 	{
-		$post = file_get_contents(PAGES . '/' . $name . '.md');
-		$page = renderPage($page, $post);
-		$app->render('page.php', array('app' => $app, 'page' => $page));
+		renderPage($app, $name, PAGES, $page);
 	}
 );
 
@@ -78,14 +74,22 @@ $app->run();
  *
  * @return mixed
  */
-function renderPage($page, $post)
+function renderPage($app, $name, $type, $page)
 {
-	$content         = substr($post, strrpos($post, '---'), strlen($post));
-	$page->content[] = Markdown::defaultTransform($content);
-	$page->metadata  = parseMetadata($post);
-	$page->title     = $page->metadata['title'];
+	if (file_exists($type . '/' . $name . '.md'))
+	{
+		$post            = file_get_contents($type . '/' . $name . '.md');
+		$content         = substr($post, strrpos($post, '---'), strlen($post));
+		$page->content[] = Markdown::defaultTransform($content);
+		$page->metadata  = parseMetadata($post);
+		$page->title     = $page->metadata['title'];
+		$app->render('page.php', array('app' => $app, 'page' => $page));
+	}
+	else
+	{
+		$app->pass();
+	}
 
-	return $page;
 }
 
 /**
