@@ -40,8 +40,8 @@ $app->get('/', function () use ($app, $env, $page)
 			{
 				$page->content[$key] .= $metadata['description'];
 			}
-			$page->title = 'blog';
 		}
+		$page->title = 'blog';
 		$app->render('page.php', array('app' => $app, 'page' => $page));
 	}
 );
@@ -76,8 +76,8 @@ $app->get('/:name', function ($name) use ($app, $env, $page)
 				$title               = ucwords(str_replace('-', ' ', substr($url, 11)));
 				$page->content[$key] = '<h2><a href="post/' . $url . '">' . $title . '</a></h2>';
 				$page->content[$key] .= substr(Markdown::defaultTransform(file_get_contents($post)), 0, 50);
-				$page->title = 'blog';
 			}
+			$page->title = 'blog';
 			$app->render('page.php', array('app' => $app, 'page' => $page));
 		}
 		elseif (file_exists(PAGES . '/' . $name . '.md'))
