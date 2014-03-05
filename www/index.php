@@ -28,12 +28,32 @@ $page = new stdClass;
 // Homepage blog layout
 $app->get('/', function () use ($app, $env, $page)
 	{
-		foreach (array_slice(array_reverse(glob(POSTS . '/*.md')), 0, 5) as $key => $post)
+		foreach (array_slice(array_reverse(glob(POSTS . '/*.md')), 0, 3) as $key => $post)
 		{
 			$url                 = str_replace('.md', '', basename($post));
 			$title               = ucwords(str_replace('-', ' ', substr($url, 11)));
 			$page->content[$key] = '<h2><a href="post/' . $url . '">' . $title . '</a></h2>';
-			$page->content[$key] .= substr(Markdown::defaultTransform(file_get_contents($post)), 0, 50);
+
+			$post = file_get_contents($post);
+
+			$meta = substr($post, 0, strrpos($post, '---'));
+			$meta = str_replace("---\n", '', trim($meta));
+			$meta = explode("\n", $meta);
+
+			foreach ($meta as $key => $value)
+			{
+				if (strpos($value, ': '))
+				{
+					$parts           = explode(': ', $value);
+					$meta[$parts[0]] = $parts[1];
+					unset($meta[$key]);
+				}
+			}
+
+			if (isset($meta['description']))
+			{
+				$page->content[$key] = $meta['description'];
+			}
 			$page->title = 'blog';
 		}
 		$app->render('page.php', array('app' => $app, 'page' => $page));
