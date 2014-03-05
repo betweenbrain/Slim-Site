@@ -34,25 +34,11 @@ $app->get('/', function () use ($app, $env, $page)
 			$title               = ucwords(str_replace('-', ' ', substr($url, 11)));
 			$page->content[$key] = '<h2><a href="post/' . $url . '">' . $title . '</a></h2>';
 
-			$post = file_get_contents($post);
+			$metadata = parseMetadata(file_get_contents($post));
 
-			$meta = substr($post, 0, strrpos($post, '---'));
-			$meta = str_replace("---\n", '', trim($meta));
-			$meta = explode("\n", $meta);
-
-			foreach ($meta as $key => $value)
+			if (isset($metadata['description']))
 			{
-				if (strpos($value, ': '))
-				{
-					$parts           = explode(': ', $value);
-					$meta[$parts[0]] = $parts[1];
-					unset($meta[$key]);
-				}
-			}
-
-			if (isset($meta['description']))
-			{
-				$page->content[$key] = $meta['description'];
+				$page->content[$key] .= $metadata['description'];
 			}
 			$page->title = 'blog';
 		}
@@ -65,7 +51,9 @@ $app->get('/post/:name', function ($name) use ($app, $env, $page)
 	{
 		if (file_exists(POSTS . '/' . $name . '.md'))
 		{
-			$page->content[] = Markdown::defaultTransform(file_get_contents(POSTS . '/' . $name . '.md'));
+			$post            = file_get_contents(POSTS . '/' . $name . '.md');
+			$content         = substr($post, strrpos($post, '---'), strlen($post));
+			$page->content[] = Markdown::defaultTransform($content);
 			$page->title     = ucwords(str_replace('-', ' ', $name));
 			$app->render('page.php', array('app' => $app, 'page' => $page));
 		}
@@ -107,3 +95,29 @@ $app->get('/:name', function ($name) use ($app, $env, $page)
 );
 
 $app->run();
+
+/**
+ * Parse markdown file for metadate
+ *
+ * @param $post
+ *
+ * @return array|mixed|string
+ */
+function parseMetadata($post)
+{
+	$meta     = substr($post, 0, strrpos($post, '---'));
+	$meta     = str_replace("---\n", '', trim($meta));
+	$meta     = explode("\n", $meta);
+	$metadata = null;
+
+	foreach ($meta as $key => $value)
+	{
+		if (strpos($value, ': '))
+		{
+			$parts               = explode(': ', $value);
+			$metadata[$parts[0]] = $parts[1];
+		}
+	}
+
+	return $metadata;
+}
