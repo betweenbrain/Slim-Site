@@ -30,11 +30,9 @@ $app->get('/', function () use ($app, $env, $page)
 	{
 		foreach (array_slice(array_reverse(glob(POSTS . '/*.md')), 0, 3) as $key => $post)
 		{
+			$metadata            = parseMetadata(file_get_contents($post));
 			$url                 = str_replace('.md', '', basename($post));
-			$title               = ucwords(str_replace('-', ' ', substr($url, 11)));
-			$page->content[$key] = '<h2><a href="post/' . $url . '">' . $title . '</a></h2>';
-
-			$metadata = parseMetadata(file_get_contents($post));
+			$page->content[$key] = '<h2><a href="post/' . $url . '">' . $metadata['title'] . '</a></h2>';
 
 			if (isset($metadata['description']))
 			{
@@ -54,7 +52,8 @@ $app->get('/post/:name', function ($name) use ($app, $env, $page)
 			$post            = file_get_contents(POSTS . '/' . $name . '.md');
 			$content         = substr($post, strrpos($post, '---'), strlen($post));
 			$page->content[] = Markdown::defaultTransform($content);
-			$page->title     = ucwords(str_replace('-', ' ', $name));
+			$page->metadata  = parseMetadata($post);
+			$page->title     = $page->metadata['title'];
 			$app->render('page.php', array('app' => $app, 'page' => $page));
 		}
 		else
@@ -82,7 +81,10 @@ $app->get('/:name', function ($name) use ($app, $env, $page)
 		}
 		elseif (file_exists(PAGES . '/' . $name . '.md'))
 		{
-			$page->content[] = Markdown::defaultTransform(file_get_contents(PAGES . '/' . $name . '.md'));
+			$post            = file_get_contents(PAGES . '/' . $name . '.md');
+			$content         = substr($post, strrpos($post, '---'), strlen($post));
+			$page->content[] = Markdown::defaultTransform($content);
+			$page->metadata  = parseMetadata($post);
 			$page->title     = ucwords(str_replace('-', ' ', $name));
 			$app->render('page.php', array('app' => $app, 'page' => $page));
 		}

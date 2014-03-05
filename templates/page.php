@@ -12,14 +12,10 @@
 $baseUrl = $app->request->getRootUri();
 ?>
 <!doctype html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
-<!--[if IE 9]>
-<html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if lt IE 7]> <html class="no-js lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie10 lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js lt-ie10" lang="en"> <![endif]-->
 <!--[if !IE]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
@@ -50,12 +46,23 @@ $baseUrl = $app->request->getRootUri();
 
 <div class="main-row">
 	<main role="main">
-		<?php
-		foreach ($page->content as $content)
-		{
-			echo $content;
-		}
-		?>
+		<?php foreach ($page->content as $content) : ?>
+			<article class="article">
+				<?php if(isset($page->metadata)) : ?>
+				<header>
+					<h1><?php echo $page->metadata['title'] ?></h1>
+				</header>
+
+				<footer>
+					<ul class="article-meta">
+					</ul>
+				</footer>
+				<?php endif ?>
+				<div class="article-body">
+					<?php echo $content ?>
+				</div>
+			</article>
+		<?php endforeach ?>
 	</main>
 </div>
 <div class="footer-row">

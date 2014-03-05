@@ -1,3 +1,9 @@
+---
+title: About
+layout: page
+description: A bit about me
+---
+
 <span class="thumbnail">
 <img src="/img/matt_thomas.jpg">
 </span>
