@@ -19,6 +19,16 @@ $baseUrl = $app->request->getRootUri();
 <!--[if !IE]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
+	<meta charset=utf-8 />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Matt Thomas"">
+	<meta name="description" content="matt.thomas.me" />
+	<meta name="handheldfriendly" content="True" />
+	<meta name="mobileoptimized" content="320" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="x-ua-compatible" content="IE=edge;chrome=1" />
+	<meta name="cleartype" content="on" />
+	<meta name="generator" content="Slim Site - https://github.com/betweenbrain/Slim-Site" />
 	<title><?php echo $page->title ?></title>
 	<link rel="stylesheet" href="<?php echo $baseUrl ?>/style.css" type="text/css" />
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400" type="text/css" />
