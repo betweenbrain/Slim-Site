@@ -14,8 +14,9 @@ define('PAGES', realpath(__DIR__ . '/../pages'));
 
 require realpath(__DIR__ . '/../vendor/autoload.php');
 
+date_default_timezone_set('America/New_York');
+
 $app = new \Slim\Slim(array(
-	'mode'           => 'development',
 	'templates.path' => realpath(__DIR__ . '/../templates')
 ));
 
