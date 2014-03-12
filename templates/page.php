@@ -99,6 +99,7 @@ $baseUrl = $app->request->getRootUri();
 
 		<div class="copyright">
 			<small>&copy; <?php echo date('Y'); ?> Matt Thomas</small>
+			<p>Built with <a href="http://slimframework.com/">Slim</a>, <a href="http://michelf.ca/">PHP Markdown Lib</a> and <a href="http://joomlafuture.com/">Oneweb</a></p>
 		</div>
 	</section>
 </div>
