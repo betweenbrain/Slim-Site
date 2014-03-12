@@ -41,7 +41,7 @@ $baseUrl = $app->request->getRootUri();
 <div class="header-row">
 	<header role="banner">
 		<div class="logo">
-			<a href="<?php echo $app->request->getRootUri(); ?>" title="">matt-thomas.me</a>
+			<a href="<?php echo $baseUrl ?>/" title="">matt-thomas.me</a>
 			<small>v0.4</small>
 		</div>
 		<nav role="navigation">
